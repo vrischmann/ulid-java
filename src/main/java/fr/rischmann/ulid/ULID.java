@@ -5,20 +5,24 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 
 public class ULID {
-    final byte[] data = new byte[16];
+    private final byte[] data = new byte[16];
 
-    public ULID() {
+    private ULID() {
     }
 
     public ULID(byte[] d) {
         System.arraycopy(d, 0, this.data, 0, data.length);
     }
 
-    private void setRandom(byte[] data) {
+    public byte[] getData() {
+        return data;
+    }
+
+    public void setRandom(byte[] data) {
         System.arraycopy(data, 0, this.data, 6, data.length);
     }
 
-    public long timestamp() {
+    public long getTimestamp() {
         long l = data[5] & 0xFF;
         long l1 = ((long) data[4] & 0xFF) << 8;
         long l2 = ((long) data[3] & 0xFF) << 16;
@@ -143,7 +147,7 @@ public class ULID {
             'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z'
     };
 
-    static final int ENCODED_SIZE = 26;
+    public static final int ENCODED_SIZE = 26;
 
     // Byte to index table for O(1) lookups when parsing.
     // 0xFF is a sentinel value for invalid indexes.
