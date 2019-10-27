@@ -12,6 +12,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub vrischmann</name>
+            <url>https://maven.pkg.github.com/vrischmann/ulid-java</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
