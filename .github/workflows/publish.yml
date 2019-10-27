@@ -1,6 +1,8 @@
-name: CI
+name: Publish
 
-on: [push]
+on:
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -9,7 +11,7 @@ jobs:
       matrix:
         java: ['8.0.x', '9.0.x', '10.0.x', '11.0.x', '12.0.x', '13.0.x']
 
-    name: Testing with Java ${{ matrix.java }}
+    name: Publishing with Java ${{ matrix.java }}
 
     steps:
       - uses: actions/checkout@v1
@@ -20,5 +22,7 @@ jobs:
           java-version: ${{ matrix.java }}
           architecture: x64
 
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
+      - name: Publish with Maven
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: mvn -B deploy --settings .github/settings.xml --file pom.xml
