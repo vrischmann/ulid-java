@@ -18,7 +18,7 @@ public class ULID {
         return data;
     }
 
-    public void setRandom(byte[] data) {
+    private void setRandom(byte[] data) {
         System.arraycopy(data, 0, this.data, 6, data.length);
     }
 
