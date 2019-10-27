@@ -83,6 +83,6 @@ public class ULIDTest {
         assertEquals(id2, id);
 
         Instant time2 = Instant.ofEpochMilli(id.getTimestamp());
-        assertEquals(time, time2);
+        assertEquals(time.toEpochMilli(), time2.toEpochMilli());
     }
 }
